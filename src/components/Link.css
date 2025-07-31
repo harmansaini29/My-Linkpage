@@ -1,0 +1,223 @@
+/* components/Link.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.link-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* animated neon border pulse (lightning) */
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 12px 60px rgba(0, 245, 255, 0.35), 0 0 25px rgba(0, 245, 255, 0.5);
+    border-color: rgba(0, 245, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 80px rgba(0, 245, 255, 0.5), 0 0 45px rgba(0, 245, 255, 0.7);
+    border-color: rgba(0, 245, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 12px 60px rgba(0, 245, 255, 0.35), 0 0 25px rgba(0, 245, 255, 0.5);
+    border-color: rgba(0, 245, 255, 0.3);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.glass-box {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 520px;
+  width: 100%;
+  color: #f5f7fa;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease both, borderPulse 4s ease-in-out infinite;
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* if you prefer a single steady glow instead of animation */
+.glass-box.static-glow {
+  animation: fadeIn 1s ease both;
+  box-shadow:
+    0 12px 60px rgba(0, 245, 255, 0.4),
+    0 0 40px rgba(0, 245, 255, 0.6);
+  border: 1px solid rgba(0, 245, 255, 0.5);
+}
+
+/* Header */
+.header {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 25px 3px rgba(0, 245, 255, 0.6), 0 0 40px 6px rgba(255, 255, 255, 0.2);
+  transition: transform 0.25s ease;
+}
+.logo:hover {
+  transform: scale(1.08);
+}
+
+/* Title styling */
+.main-title {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  margin: 6px 0;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff, #00f5ff 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 8px;
+}
+
+.main-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(0, 245, 255, 0.7);
+  transition: width 0.35s ease;
+}
+
+.main-title:hover::after {
+  width: 80%;
+}
+
+.subtitle {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4px;
+  line-height: 1.4;
+  max-width: 420px;
+}
+
+/* Links */
+.link-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.glass-link {
+  position: relative;
+  display: block;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #f0f9ff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.glass-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(255,255,255,0.08));
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 14px;
+}
+
+.glass-link:hover,
+.glass-link:focus {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 245, 255, 0.45);
+  color: #00f5ff;
+}
+.glass-link:hover::before,
+.glass-link:focus::before {
+  opacity: 1;
+}
+
+.glass-link:active {
+  transform: scale(0.97);
+  box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+  background: rgba(255, 255, 255, 0.18);
+  color: #00d8ff;
+}
+
+.glass-link:visited {
+  color: #d1eaff;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .glass-box {
+    padding: 24px 16px;
+  }
+  .main-title {
+    font-size: 24px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .logo {
+    width: 64px;
+    height: 64px;
+  }
+  .glass-link {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}
